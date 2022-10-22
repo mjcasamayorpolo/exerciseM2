@@ -1,0 +1,1 @@
+{"mappings":"AACAA,QAAQC,IAAI,SAAcC,OADb,QACa","sources":["src/app.js"],"sourcesContent":["const name = 'world';\r\nconsole.log(`Hello ${name}!`);\r\n"],"names":["console","log","concat"],"version":3,"file":"index.51a5deda.js.map"}

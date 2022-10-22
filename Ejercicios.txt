@@ -1,0 +1,137 @@
+cd /mnt/c/ para ir a la carpeta C
+
+SOBRE LOS MODULE BLUNDERS
+Actividad 1
+ 
+• ¿Para qué crees que sirve el comando npx ? ¿Qué ha sucedido cuando lo has lanzado?
+Para ejecutar el paquete indicando la aplicación que tenía que depslegar. 
+Cuando se ha ejecutado el comando, la aplicación se ha ejecutado en un puerto determinado.
+
+• ¿Qué diferencias hay entre instalar un paquete en global y en local? ¿Por qué recomendamos instalar en local?
+Instalar paquetes de manera local signifaca que la instalación solo se realiza y por lo tanto afecta al directorio
+sobre el que se realiza la instalación. Instalar paquetes de manera global significa que se realiza una instalación
+en el sistema.
+Los paquetes locales normalmente se utilizan en programas de nodos, mientras que los paquetes globales suelen ser
+programas en sí mismos que tienen una interfaz de línea de comandos o CLI 
+No se recomienda instalar de manera global ya que las instalaciones globales están enfocadas a herramientas y no paquetes.
+
+• ¿Qué otros cambios has introducido o han aparecido en el archivo package.json ?
+Se han introducido los parámetros source que indica el archivo que arranca la aplicación y en script se han indicado
+los comandos que ejecutan los paquetes.
+
+• ¿Sabrías explicar para qué sirve cada script que has añadido a tu package.json ?
+El script start sirve para ejecutar parcel con el comando npm start 
+y por otro lado build indica que npm run build construye el código para ejecutarlo en producción.
+Ofusca y minimiza el código de manera que indica la nueva carpeta y los archivos modificados. 
+
+Actividad 2
+1. Ejecuta el comando npm run build .
+• ¿Qué ocurre en el terminal?
+Se ofusca y minimiza el código de la aplicación para que esté listo para el entorno de producción. 
+
+• ¿Qué ocurre en la carpeta de trabajo?
+Se crea una nueva carpeta dist con los archivos ofuscados y minificados de la aplicación.
+
+• ¿Qué crees que hay en la nueva carpeta que ha aparecido?
+Los archivos ofuscados y minificados de la apliacación. 
+
+• Inspecciona los archivos generados. ¿Qué diferencias hay?
+El código está ofuscado.
+
+2. Para comparar las diferencias abre algún archivo (por ejemplo, el index.html en ambas rutas) con
+tu editor de texto. Observa de nuevo el terminal. Habiendo explorado la carpeta, ¿cómo interpretas la
+información que aparece en el terminal?
+El código aparece totalmente comprimido, sin espacios. 
+
+3. Ejecuta la orden npm run start .
+• ¿Qué ocurre?
+• ¿Qué diferencias hay con la ejecución de la orden anterior?
+• Mantén esta ventana del terminal abierta. Si no se te abre el navegador automáticamente, abre una
+ventana del navegador e introduce la URL que te ha aparecido en el terminal (normalmente, http://
+localhost:1234 ).
+Me ocurre un fallo porque no detecta que archivo de los dos js ejecutar. 
+
+4. Prueba a editar el archivo HTML de la raíz del proyecto. Por ejemplo, sustituye dentro de la etiqueta `h1`
+el texto `Hello World` por `Hello UOC`. Guarda el archivo y, sin recargar la pestaña del navegador que has
+abierto en el paso anterior, observa si el cambio aparece en la página.
+• ¿Cómo crees que esto beneficia a los programadores y programadoras que trabajan en aplicaciones con module
+bundlers?
+Esto resulta muy beneficioso al poder realizar cambios y visualizarlos de manera inmediata en el navegador 
+
+Actividad 3
+1. Vuelve a ejecutar la orden npm run build .
+• ¿Qué ocurre en la carpeta de dist/?
+No ocurre nada, vuelve a sobreescribir los mismos archivos. 
+• Como habrás podido comprobar, Parcel genera una nueva versión de archivos listos para producción, pero no
+elimina los antiguos. Si no los vamos borrando, crecerían indefinidamente.
+
+2. Ejecuta la siguiente orden: npm install --save-dev rimraf npm-run-all .
+• ¿Qué cambios se han producido en el fichero package.json? 
+Al ejecutar el comando, se han añadido las siguientes propiedades en devDependencies: 
+"npm-run-all": "^4.1.5",
+"rimraf": "^3.0.2"
+  
+En el mismo package.json, añade las siguientes
+líneas dentro del apartado "scripts":
+"parcel:dev" : "parcel"
+, "parcel:build" :
+"parcel build" , "clean"
+: "rimraf dist .parcel-cache"
+Finalmente, sustituye las tareas anteriores "start" y "build" por las siguientes:
+"start" : "npm-run-all
+clean parcel:dev" , "build"
+: "npm-run-all clean parcel:build" ,
+Vuelve a ejecutar la orden npm run build .
+• ¿Qué ocurre ahora en la carpeta de dist/?
+La carpeta dist ha sido eliminada y se ha vuelto a crear 
+
+• ¿Qué diferencia hay respecto la ejecución anterior?
+La ejecución anterior sobreescribia los archivos de la carpeta cada vez que hacía un npm run build
+
+• ¿Qué ventajas crees que aporta este cambio?
+En teoría, si se van acumulando los archivos (aunque a mi no me ha ocurrido) limpiar el directorio, de manera
+que no se acumulen varias pruebas de ofuscacion de código. 
+
+• ¿Sabrías descifrar cuál es el objetivo de cada una de las órdenes que hemos escrito en los puntos anteriores?
+Hemos instalado el modulo npm-run-all que sirve para ejecutar multiples npm scripts secuencialmente o en paralelo.
+También se ha instalado rimraf que sirve para limpiar en profundidad directorios. 
+Por lo tanto, al ejecutar npm run build se ha hecho empleo de este modulo (npm-run-start) y se ha ejecutado de manera
+secuencial npm run clean que ejecutaba el modulo rimraf y limpiaba los directorios dist y parcel-cache y a continuación
+se ejecutaba npm run parcel-build que este comando equivalia a ejecutar npm run parcel build.  
+
+• ¿Y los paquetes adicionales que hemos instalado, para qué sirven?
+Se ha respondido en la anterior pregunta
+
+SOBRE LOS PREPROCESADORES DE CÓDIGO
+
+Actividad 1 
+¿Qué diferencias hay respecto el código JavaScript anterior generado por Parcel?
+El cñodigo está ofuscado 
+
+Actividad 2
+• ¿Sabrías explicar en una frase qué navegadores soportará nuestro boilerplate?
+el parámetro establecido ha sido:
+"> 0.5%, last 2 versions, not dead"
+Que significa: 
+(>0.5%) Los navegadores utilizados más de un 0.5% a nivel mundial.
+(last 2 versions) Los navegadores principales en su versión actual hasta 2 versiones hacia atrás.
+(not*) Excluye los navegadores que vengan precedidos por esta palabra clave. 
+(dead)Navegadores sin soporte oficial.
+Por lo tanto, nuestro boilerplate soportará aquellos navegadores utilizados más de un 0.5% a nivel mundial,
+en su versión actual hasta 2 versiones hacia atrás y no soportará aquellos navegadores que no tengan soporte oficial.
+
+• Prueba a cambiar los navegadores soportados y crear una configuración personalizada de soporte de navegadores.
+He intenado escribir un browserslist que no fuera compatible con Chrome y no ha ocurrido nada
+
+Actividad 3 
+1. Ejecuta la orden npm run build . Como hemos hecho anteriormente, comprueba el resultado del
+archivo style.css creado en la carpeta dist/.
+2. ¿Qué diferencias ves?
+la propiedad linear-gradient ha cambiado. Hemos pasado de tener un valor:
+background: linear-gradient(to bottom, #bada55, #c0ffee);
+a tener el valor:
+background:linear-gradient(#bada55,#c0ffee)
+3. ¿Cuáles de los cambios crees que son responsabilidad de PostCSS y el Autoprefixer?
+4. ¿Sabrías encontrar otra propiedad que necesite ser modificada por el Autoprefixer y otra que no lo
+necesite?
+
